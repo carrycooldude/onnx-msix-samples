@@ -1,0 +1,7 @@
+<Window x:Class="ONNXCSharpApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        Title="ONNX C# App" Height="200" Width="400">
+    <Grid>
+        <TextBlock Name="ResultText" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Window>
