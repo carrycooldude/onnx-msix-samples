@@ -1,3 +1,16 @@
+# 🧠 ONNX MSIX Samples
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Platform](https://img.shields.io/badge/platform-Windows-blue)
+![Tech Stack](https://img.shields.io/badge/tech-ONNX%20%7C%20MSIX%20%7C%20Python%20%7C%20Electron%20%7C%20C%23%20%7C%20C%2B%2B-green)
+
+A collection of minimal AI apps using [ONNX Runtime](https://onnxruntime.ai/) across four languages—**Python**, **JavaScript/TypeScript (Electron)**, **C# (.NET)**, and **C/C++**—each packaged with **MSIX** for Windows distribution.
+
+> 🎯 Perfect for developers looking to deploy ONNX-powered apps to the Microsoft Store using their preferred tech stack.
+
+## 📦 Project Structure
+
+
 ## 📁 Repo Structure: `onnx-msix-samples/`
 
 ```
