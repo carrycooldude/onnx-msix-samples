@@ -79,11 +79,23 @@ All apps are structured and ready for testing and packaging on Snapdragon X Elit
 
 ### Python (`python-app/`)
 - **Frontend:** Flask (see `frontend/app.py`)
-- **Backend:** ONNX Runtime + pywinrt (see `backend/inference.py`)
+- **Backend:** ONNX Runtime + [pywinrt](https://github.com/pywinrt/pywinrt) (see `backend/inference.py`)
 - **Build:** Python, `build.ps1`
 - **Test:** Run `python-app/test_python_app.bat` (requires Python installation)
 - **Model:** Uses `shared/model.onnx`
 - **Tested on:** Windows 11, Snapdragon X Elite
+
+> **Note:**  
+> The Python backend leverages [pywinrt](https://github.com/pywinrt/pywinrt) to access Windows Runtime APIs, enabling deeper Windows integration for your AI apps.
+
+#### 🚀 NPU (Qualcomm Hexagon) Support
+- For Snapdragon X Elite (Qualcomm Hexagon NPU 0) acceleration, use the provided script:
+  ```
+  cd python-app
+  install_deps_npu.bat
+  ```
+- This will install all dependencies and attempt to enable NPU acceleration.
+- See `python-app/README.md` for full workflow, troubleshooting, and advanced NPU notes.
 
 ---
 
