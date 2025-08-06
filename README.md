@@ -35,7 +35,7 @@ All apps are structured and ready for testing and packaging on Snapdragon X Elit
 
 - **Updated build scripts** for ARM64 compatibility and no external MakeAppx.exe dependency
 - **Test executables/scripts** for quick verification of app functionality
-- **ONNX model (`squeeze.onnx`)** in the shared directory, used by all backends
+- **ONNX model (`model.onnx`)** in the shared directory, used by all backends
 - **Frontend and backend separation** in all languages
 - **Sample code** in each backend to load and run inference on `squeeze.onnx`
 - **Frontend code** to trigger inference and display results
