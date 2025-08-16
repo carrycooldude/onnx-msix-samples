@@ -104,3 +104,87 @@ pyi-archive_viewer dist/your_script.exe
 ```
 
 This helps verify if all modules are included.
+
+
+
+## 🚨 Problem Summary
+
+You're getting errors like:
+
+```
+Error in PDF processing: No module named 'transformers.models.shieldgemma2'
+```
+
+This means PyInstaller is missing **dynamically imported submodules** from the `transformers` library (like `shieldgemma2`, `wav2vec2_with_lm`, etc.). These aren't detected automatically because `transformers` uses dynamic imports and lazy loading.
+
+---
+
+## ✅ Solution Strategy
+
+### 1. **Explicitly Add Hidden Imports**
+Use the `--hidden-import` flag for each missing submodule:
+
+```bash
+pyinstaller your_script.py --onefile \
+  --hidden-import=transformers.models.shieldgemma2 \
+  --hidden-import=transformers.models.wav2vec2_with_lm \
+  --hidden-import=transformers.models.nougat.tokenization_nougat_fast \
+  --hidden-import=transformers.models.gemma.modeling_flax_gemma
+```
+
+You can add more based on the log. If there are too many, use a `.spec` file.
+
+---
+
+### 2. **Use a `.spec` File for Better Control**
+Generate it:
+
+```bash
+pyi-makespec your_script.py
+```
+
+Edit the `.spec` file:
+
+```python
+hiddenimports = [
+    'transformers.models.shieldgemma2',
+    'transformers.models.wav2vec2_with_lm',
+    'transformers.models.nougat.tokenization_nougat_fast',
+    'transformers.models.gemma.modeling_flax_gemma',
+    # Add more as needed
+]
+
+a = Analysis(
+    ...
+    hiddenimports=hiddenimports,
+    ...
+)
+```
+
+Then build:
+
+```bash
+pyinstaller your_script.spec
+```
+
+---
+
+### 3. **Use `collect_submodules` for Dynamic Modules**
+If you're using `transformers` heavily, automate hidden imports:
+
+```python
+from PyInstaller.utils.hooks import collect_submodules
+
+hiddenimports = collect_submodules('transformers.models')
+```
+
+This grabs all submodules under `transformers.models`.
+
+---
+
+### 4. **MSIX Packaging Reminder**
+Once `.exe` is built:
+
+- Use [MSIX Packaging Tool](https://learn.microsoft.com/en-us/windows/msix/packaging-tool/create-app-package) to wrap it
+- Ensure dependencies are bundled
+- Test on a clean machine to verify no missing DLLs or Python dependencies
